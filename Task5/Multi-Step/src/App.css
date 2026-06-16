@@ -1,0 +1,275 @@
+/* =============================================
+   App.css — All styles for the Onboarding App
+   ============================================= */
+
+/* ---- CSS Variables (easy to change theme) ---- */
+:root {
+  --primary: #4f46e5;       /* indigo */
+  --primary-dark: #3730a3;
+  --secondary: #e5e7eb;
+  --success: #10b981;
+  --error: #ef4444;
+  --text: #111827;
+  --text-light: #6b7280;
+  --bg: #f3f4f6;
+  --white: #ffffff;
+  --radius: 12px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ---- Reset & Base ---- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ---- Onboarding Layout ---- */
+.onboarding-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.onboarding-container {
+  width: 100%;
+  max-width: 620px;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 36px;
+}
+
+/* ---- Header ---- */
+.onboarding-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.onboarding-header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.onboarding-header p {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* ---- Step Indicator ---- */
+.step-indicator {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Connecting line between circles */
+.step-line {
+  width: 60px;
+  height: 2px;
+  background: var(--secondary);
+  margin-top: 18px; /* vertically center with circle */
+  transition: background 0.3s;
+}
+
+.step-line.visited {
+  background: var(--primary);
+}
+
+/* Step circle button */
+.step-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--secondary);
+  background: var(--white);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: default;
+  color: var(--text-light);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-circle.visited {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--white);
+  cursor: pointer;  /* clickable when visited */
+}
+
+.step-circle.active {
+  border-color: var(--primary);
+  background: var(--white);
+  color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+  cursor: default;
+}
+
+.step-label {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  margin-top: 6px;
+  text-align: center;
+}
+
+.step-label.active {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ---- Form Card ---- */
+.form-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-card h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+/* ---- Form Fields ---- */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.form-field input,
+.form-field select {
+  padding: 10px 14px;
+  border: 1.5px solid var(--secondary);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: var(--primary);
+}
+
+/* Error message below input */
+.error-msg {
+  font-size: 0.78rem;
+  color: var(--error);
+}
+
+/* Checkbox row */
+.checkbox-field label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* ---- Navigation Buttons ---- */
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  gap: 12px;
+}
+
+.btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+  margin-left: auto; /* push to right if Back is hidden */
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  background: #d1d5db;
+}
+
+/* ---- Success Screen ---- */
+.success-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+
+.success-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 48px 40px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.success-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.success-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--success);
+}
+
+.success-card p {
+  color: var(--text-light);
+  margin-bottom: 24px;
+}
