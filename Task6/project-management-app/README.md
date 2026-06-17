@@ -1,4 +1,4 @@
-src/
+<!-- src/
 │
 ├── app/
 │ ├── store.js
@@ -34,4 +34,4 @@ src/
 │
 ├── App.jsx
 ├── main.jsx
-└── App.css
+└── App.css -->
