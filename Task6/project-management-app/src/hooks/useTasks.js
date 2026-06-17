@@ -6,6 +6,7 @@ import {
 import {
   addTask,
   deleteTask,
+  moveTask,
 } from "../redux/taskSlice";
 
 export const useTasks = () => {
@@ -22,10 +23,21 @@ export const useTasks = () => {
   const removeTask = (id) => {
     dispatch(deleteTask(id));
   };
-
+  const moveTaskToBoard = (
+    taskId,
+    boardId
+  ) => {
+    dispatch(
+      moveTask({
+        taskId,
+        boardId,
+      })
+    );
+  };
   return {
     tasks,
     createTask,
     removeTask,
+    moveTaskToBoard,
   };
 };
