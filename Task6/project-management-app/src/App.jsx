@@ -1,10 +1,30 @@
+import { useState } from "react";
 import BoardView from "./components/BoardView";
 import { useBoards } from "./hooks/useBoards";
 import { useProjects } from "./hooks/useProjects";
+import { useTasks } from "./hooks/useTasks";
 
 function App() {
   const { projects, createProject, removeProject } = useProjects();
+  const { createTask } = useTasks();
 
+  const [title, setTitle] = useState("");
+
+  const addTaskHandler = () => {
+    if (!title) return;
+
+    createTask({
+      id: Date.now(),
+
+      title,
+
+      boardId: "todo",
+
+      priority: "Medium",
+    });
+
+    setTitle("");
+  };
   const handleAddProject = () => {
     createProject({
       id: Date.now(),
@@ -16,6 +36,15 @@ function App() {
   return (
     <>
       <h1>Project Management App</h1>
+
+      <input
+        type="text"
+        placeholder="Task Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+
+      <button onClick={addTaskHandler}>Add Task</button>
 
       <BoardView />
 
