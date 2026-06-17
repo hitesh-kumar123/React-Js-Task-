@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { useBoards } from "../hooks/useBoards";
 import { useTasks } from "../hooks/useTasks";
-import { useDrop } from "react-dnd";
 
 import TaskCard from "./TaskCard";
 
@@ -9,60 +9,67 @@ const BoardView = () => {
 
   const {
     tasks,
+    createTask,
     removeTask,
-    moveTaskToBoard,
   } = useTasks();
 
-  return (
-    <div className="board-container">
-      {boards.map((board) => (
-        <BoardColumn
-          key={board.id}
-          board={board}
-          tasks={tasks.filter(
-            (task) => task.boardId === board.id
-          )}
-          moveTaskToBoard={moveTaskToBoard}
-          removeTask={removeTask}
-        />
-      ))}
-    </div>
-  );
-};
+  const [title, setTitle] =
+    useState("");
 
-const BoardColumn = ({
-  board,
-  tasks,
-  moveTaskToBoard,
-  removeTask,
-}) => {
-  const [, drop] = useDrop(() => ({
-    accept: "TASK",
+  const addTaskHandler = () => {
+    if (!title.trim()) return;
 
-    drop: (item) => {
-      moveTaskToBoard(item.id, board.id);
-    },
-  }));
+    createTask({
+      id: Date.now(),
+      title,
+      boardId: "todo",
+      priority: "Medium",
+    });
+
+    setTitle("");
+  };
 
   return (
-    <div
-      ref={drop}
-      className="board"
-    >
-      <h3>{board.title}</h3>
+    <>
+      <h2>Boards</h2>
 
-      {tasks.length === 0 ? (
-        <p>No Tasks</p>
-      ) : (
-        tasks.map((task) => (
-          <TaskCard
-            key={task.id}
-            task={task}
-            removeTask={removeTask}
-          />
-        ))
-      )}
-    </div>
+      <input
+        type="text"
+        placeholder="Task Title"
+        value={title}
+        onChange={(e) =>
+          setTitle(e.target.value)
+        }
+      />
+
+      <button onClick={addTaskHandler}>
+        Add Task
+      </button>
+
+      <div className="board-container">
+        {boards.map((board) => (
+          <div
+            key={board.id}
+            className="board"
+          >
+            <h3>{board.title}</h3>
+
+            {tasks
+              .filter(
+                (task) =>
+                  task.boardId === board.id
+              )
+              .map((task) => (
+                <TaskCard
+                  key={task.id}
+                  task={task}
+                  removeTask={removeTask}
+                />
+              ))}
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 

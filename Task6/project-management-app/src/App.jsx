@@ -1,67 +1,34 @@
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
+import Dashboard from "./components/Dashboard";
 import BoardView from "./components/BoardView";
-import { useBoards } from "./hooks/useBoards";
-import { useProjects } from "./hooks/useProjects";
-import { useTasks } from "./hooks/useTasks";
+import UserSettings from "./components/UserSettings";
 
 function App() {
-  const { projects, createProject, removeProject } = useProjects();
-  const { createTask } = useTasks();
-
-  const [title, setTitle] = useState("");
-
-  const addTaskHandler = () => {
-    if (!title) return;
-
-    createTask({
-      id: Date.now(),
-
-      title,
-
-      boardId: "todo",
-
-      priority: "Medium",
-    });
-
-    setTitle("");
-  };
-  const handleAddProject = () => {
-    createProject({
-      id: Date.now(),
-      name: "My First Project",
-    });
-  };
-  const { boards } = useBoards();
-
   return (
-    <>
-      <h1>Project Management App</h1>
+    <BrowserRouter>
+      <Navbar />
 
-      <input
-        type="text"
-        placeholder="Task Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+      <div className="container">
+        <Routes>
+          <Route
+            path="/"
+            element={<Dashboard />}
+          />
 
-      <button onClick={addTaskHandler}>Add Task</button>
+          <Route
+            path="/boards"
+            element={<BoardView />}
+          />
 
-      <BoardView />
-
-      <h2>Projects</h2>
-      <button onClick={handleAddProject}>Add Project</button>
-      {projects.map((project) => (
-        <div key={project.id}>
-          <h3>{project.name}</h3>
-          <button onClick={() => removeProject(project.id)}>Delete</button>
-        </div>
-      ))}
-      <hr />
-      <h2>Board</h2>
-      {boards.map((board) => (
-        <h4 key={board.id}>{board.title}</h4>
-      ))}
-    </>
+          <Route
+            path="/users"
+            element={<UserSettings />}
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
