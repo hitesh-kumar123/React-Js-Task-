@@ -1,5 +1,4 @@
-import { useMemo }
-from "react";
+import { useMemo } from "react";
 
 export const useFilterAndSort = (
   tasks,
@@ -8,8 +7,7 @@ export const useFilterAndSort = (
 
   return useMemo(() => {
 
-    let result =
-      [...tasks];
+    let result = [...tasks];
 
     if (
       filters.priority
@@ -20,6 +18,18 @@ export const useFilterAndSort = (
           (task) =>
             task.priority ===
             filters.priority
+        );
+    }
+
+    if (
+      filters.assignee
+    ) {
+
+      result =
+        result.filter(
+          (task) =>
+            task.assignee ===
+            filters.assignee
         );
     }
 
@@ -39,8 +49,19 @@ export const useFilterAndSort = (
         );
     }
 
+    if (
+      filters.sortBy ===
+      "dueDate"
+    ) {
+
+      result.sort(
+        (a, b) =>
+          new Date(a.dueDate) -
+          new Date(b.dueDate)
+      );
+    }
+
     return result;
 
   }, [tasks, filters]);
-
 };

@@ -1,25 +1,43 @@
-import { useDispatch, useSelector } from "react-redux";
-import { addProject, deleteProject } from "../redux/projectSlice";
+import {
+  useDispatch,
+  useSelector,
+} from "react-redux";
 
+import {
+  addProject,
+  updateProject,
+  deleteProject,
+  selectProject,
+} from "../redux/projectSlice";
 
 export const useProjects = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const projects = useSelector((state) => state.project.list);
+  const projects = useSelector(
+    (state) =>
+      state.projects.projects
+  );
 
-    const createProject = (project) => {
-        dispatch(addProject(project))
-    }
+  const selectedProject =
+    useSelector(
+      (state) =>
+        state.projects.selectedProject
+    );
 
-    // delete 
-    const removeProject = (id) => {
-        dispatch(deleteProject(id));
-        console.log(removeProject)
-    };
+  return {
+    projects,
+    selectedProject,
 
-    return {
-        projects,
-        createProject,
-        removeProject
-    }
-}
+    createProject: (project) =>
+      dispatch(addProject(project)),
+
+    editProject: (project) =>
+      dispatch(updateProject(project)),
+
+    removeProject: (id) =>
+      dispatch(deleteProject(id)),
+
+    setProject: (id) =>
+      dispatch(selectProject(id)),
+  };
+};

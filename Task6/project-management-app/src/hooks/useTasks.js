@@ -5,6 +5,7 @@ import {
 
 import {
   addTask,
+  updateTask,
   deleteTask,
   moveTask,
 } from "../redux/taskSlice";
@@ -13,31 +14,31 @@ export const useTasks = () => {
   const dispatch = useDispatch();
 
   const tasks = useSelector(
-    (state) => state.tasks.tasks
+    (state) =>
+      state.tasks.tasks
   );
 
-  const createTask = (task) => {
-    dispatch(addTask(task));
-  };
-
-  const removeTask = (id) => {
-    dispatch(deleteTask(id));
-  };
-  const moveTaskToBoard = (
-    taskId,
-    boardId
-  ) => {
-    dispatch(
-      moveTask({
-        taskId,
-        boardId,
-      })
-    );
-  };
   return {
     tasks,
-    createTask,
-    removeTask,
-    moveTaskToBoard,
+
+    createTask: (task) =>
+      dispatch(addTask(task)),
+
+    editTask: (task) =>
+      dispatch(updateTask(task)),
+
+    removeTask: (id) =>
+      dispatch(deleteTask(id)),
+
+    moveTaskToBoard: (
+      taskId,
+      boardId
+    ) =>
+      dispatch(
+        moveTask({
+          taskId,
+          boardId,
+        })
+      ),
   };
 };

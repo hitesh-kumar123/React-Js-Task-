@@ -1,48 +1,34 @@
-import {
-    useDispatch,
-    useSelector,
-} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
-    login,
-    logout,
+  login,
+  logout,
+  updateRole,
 } from "../redux/authSlice";
 
-export const useAuth =
-    () => {
+export const useAuth = () => {
+  const dispatch = useDispatch();
 
-        const dispatch =
-            useDispatch();
+  const auth = useSelector(
+    (state) => state.auth
+  );
 
-        const auth =
-            useSelector(
-                (state) =>
-                    state.auth
-            );
+  const signIn = (user) => {
+    dispatch(login(user));
+  };
 
-        const signIn =
-            (user) => {
+  const signOut = () => {
+    dispatch(logout());
+  };
 
-                dispatch(
-                    login(user)
-                );
-            };
+  const changeRole = (role) => {
+    dispatch(updateRole(role));
+  };
 
-        const signOut =
-            () => {
-
-                dispatch(
-                    logout()
-                );
-            };
-
-        return {
-
-            ...auth,
-
-            signIn,
-
-            signOut,
-
-        };
-    };
+  return {
+    ...auth,
+    signIn,
+    signOut,
+    changeRole,
+  };
+};

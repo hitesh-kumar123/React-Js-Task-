@@ -1,27 +1,28 @@
-import { useDispatch, useSelector } from "react-redux"
-import { addBoard, deleteBoard } from "../redux/boardSlice";
+import {
+  useDispatch,
+  useSelector,
+} from "react-redux";
 
-
+import {
+  addBoard,
+  deleteBoard,
+} from "../redux/boardSlice";
 
 export const useBoards = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const boards = useSelector(
-        (state) => state.boards.boards
-    );
+  const boards = useSelector(
+    (state) =>
+      state.boards.boards
+  );
 
-    const createBoard = (board) => {
-        dispatch(addBoard(board));
-    };
+  return {
+    boards,
 
-    const removeBoard = (id) => {
-        dispatch(deleteBoard(id));
-    }
+    createBoard: (board) =>
+      dispatch(addBoard(board)),
 
-    return {
-        boards,
-        createBoard,
-        removeBoard,
-    }
-
-}
+    removeBoard: (id) =>
+      dispatch(deleteBoard(id)),
+  };
+};

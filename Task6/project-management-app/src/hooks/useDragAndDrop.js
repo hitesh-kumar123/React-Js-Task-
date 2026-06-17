@@ -12,23 +12,23 @@ export const useDragAndDrop = (
     useDrag(() => ({
       type: "TASK",
 
-      item: {
-        id: task?.id,
-      },
+      item: task,
 
-      collect: (monitor) => ({
+      collect: (
+        monitor
+      ) => ({
         isDragging:
           monitor.isDragging(),
       }),
     }));
 
-  const [, drop] = useDrop(() => ({
-    accept: "TASK",
+  const [, drop] =
+    useDrop(() => ({
+      accept: "TASK",
 
-    drop: (item) => {
-      onDrop(item);
-    },
-  }));
+      drop: (item) =>
+        onDrop(item),
+    }));
 
   return {
     drag,

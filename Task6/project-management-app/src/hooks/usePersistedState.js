@@ -1,22 +1,22 @@
 import {
-  useEffect,
   useState,
+  useEffect,
 } from "react";
 
 export const usePersistedState = (
   key,
-  initialValue
+  defaultValue
 ) => {
 
   const [value, setValue] =
     useState(() => {
 
-      const stored =
+      const saved =
         localStorage.getItem(key);
 
-      return stored
-        ? JSON.parse(stored)
-        : initialValue;
+      return saved
+        ? JSON.parse(saved)
+        : defaultValue;
     });
 
   useEffect(() => {

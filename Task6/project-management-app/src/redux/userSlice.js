@@ -1,22 +1,16 @@
-import { createSlice }
-from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-const userSlice =
-createSlice({
+const initialState = {
+  users: [],
+};
 
+const userSlice = createSlice({
   name: "users",
 
-  initialState: {
-    users: [],
-  },
+  initialState,
 
   reducers: {
-
-    addUser: (
-      state,
-      action
-    ) => {
-
+    addUser: (state, action) => {
       state.users.push(
         action.payload
       );
@@ -26,13 +20,28 @@ createSlice({
       state,
       action
     ) => {
-
       state.users =
         state.users.filter(
           (user) =>
-            user.id !==
-            action.payload
+            user.id !== action.payload
         );
+    },
+
+    updateUserRole: (
+      state,
+      action
+    ) => {
+      const user =
+        state.users.find(
+          (user) =>
+            user.id ===
+            action.payload.id
+        );
+
+      if (user) {
+        user.role =
+          action.payload.role;
+      }
     },
   },
 });
@@ -40,7 +49,7 @@ createSlice({
 export const {
   addUser,
   removeUser,
+  updateUserRole,
 } = userSlice.actions;
 
-export default
-userSlice.reducer;
+export default userSlice.reducer;

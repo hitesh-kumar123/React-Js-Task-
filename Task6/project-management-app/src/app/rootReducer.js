@@ -4,22 +4,27 @@ import authReducer from "../redux/authSlice";
 import projectReducer from "../redux/projectSlice";
 import boardReducer from "../redux/boardSlice";
 import taskReducer from "../redux/taskSlice";
-import notificationReducer
-    from "../redux/notificationSlice";
-import userReducer
-    from "../redux/userSlice";
+import userReducer from "../redux/userSlice";
+import notificationReducer from "../redux/notificationSlice";
 
-const rootReducer = combineReducers({
+const rootReducer =
+  combineReducers({
     auth: authReducer,
-    project: projectReducer,
-    boards: boardReducer,
-    tasks: taskReducer,
+
+    projects:
+      projectReducer,
+
+    boards:
+      boardReducer,
+
+    tasks:
+      taskReducer,
+
+    users:
+      userReducer,
+
     notifications:
-        notificationReducer,
-
-    users: userReducer,
-
-});
-console.log(projectReducer);
+      notificationReducer,
+  });
 
 export default rootReducer;

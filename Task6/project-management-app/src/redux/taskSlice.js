@@ -1,45 +1,75 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    tasks: [],
+  tasks: [],
 };
 
 const taskSlice = createSlice({
-    name: "tasks",
-    initialState,
+  name: "tasks",
 
-    reducers: {
-        addTask: (state, action) => {
-            state.tasks.push(action.payload);
-        },
+  initialState,
 
-        deleteTask: (state, action) => {
-            state.tasks = state.tasks.filter(
-                (task) =>
-                    task.id !== action.payload
-            );
-        },
+  reducers: {
+    addTask: (state, action) => {
+      state.tasks.push(
+        action.payload
+      );
+    },
 
-        moveTask: (state, action) => {
-            const { taskId, boardId } =
-                action.payload;
+    updateTask: (
+      state,
+      action
+    ) => {
+      const index =
+        state.tasks.findIndex(
+          (task) =>
+            task.id === action.payload.id
+        );
 
-            const task = state.tasks.find(
-                (task) =>
-                    task.id === taskId
-            );
+      if (index !== -1) {
+        state.tasks[index] =
+          action.payload;
+      }
+    },
 
-            if (task) {
-                task.boardId = boardId;
-            }
-        },
-    }
+    deleteTask: (
+      state,
+      action
+    ) => {
+      state.tasks =
+        state.tasks.filter(
+          (task) =>
+            task.id !== action.payload
+        );
+    },
+
+    moveTask: (
+      state,
+      action
+    ) => {
+      const {
+        taskId,
+        boardId,
+      } = action.payload;
+
+      const task =
+        state.tasks.find(
+          (task) =>
+            task.id === taskId
+        );
+
+      if (task) {
+        task.boardId = boardId;
+      }
+    },
+  },
 });
 
 export const {
-    addTask,
-    deleteTask,
-    moveTask,
+  addTask,
+  updateTask,
+  deleteTask,
+  moveTask,
 } = taskSlice.actions;
 
 export default taskSlice.reducer;

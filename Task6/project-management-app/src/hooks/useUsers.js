@@ -1,48 +1,40 @@
 import {
-    useDispatch,
-    useSelector,
+  useDispatch,
+  useSelector,
 } from "react-redux";
 
 import {
-    addUser,
-    removeUser,
+  addUser,
+  removeUser,
+  updateUserRole,
 } from "../redux/userSlice";
 
-export const useUsers =
-    () => {
+export const useUsers = () => {
+  const dispatch = useDispatch();
 
-        const dispatch =
-            useDispatch();
+  const users = useSelector(
+    (state) =>
+      state.users.users
+  );
 
-        const users =
-            useSelector(
-                (state) =>
-                    state.users.users
-            );
+  return {
+    users,
 
-        const inviteUser =
-            (user) => {
+    inviteUser: (user) =>
+      dispatch(addUser(user)),
 
-                dispatch(
-                    addUser(user)
-                );
-            };
+    deleteUser: (id) =>
+      dispatch(removeUser(id)),
 
-        const deleteUser =
-            (id) => {
-
-                dispatch(
-                    removeUser(id)
-                );
-            };
-
-        return {
-
-            users,
-
-            inviteUser,
-
-            deleteUser,
-
-        };
-    };
+    changeRole: (
+      id,
+      role
+    ) =>
+      dispatch(
+        updateUserRole({
+          id,
+          role,
+        })
+      ),
+  };
+};

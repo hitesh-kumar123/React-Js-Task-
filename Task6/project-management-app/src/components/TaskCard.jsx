@@ -1,29 +1,59 @@
-import { useDrag } from "react-dnd";
+import {
+  useDragAndDrop,
+} from "../hooks";
 
-const TaskCard = ({ task, removeTask }) => {
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: "TASK",
+const TaskCard = ({
+  task,
+  removeTask,
+}) => {
 
-    item: {
-      id: task.id,
-    },
-
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  }));
+  const {
+    drag,
+    isDragging,
+  } =
+    useDragAndDrop(
+      task,
+      () => {}
+    );
 
   return (
     <div
       ref={drag}
       className="task-card"
       style={{
-        opacity: isDragging ? 0.5 : 1,
+        opacity:
+          isDragging
+            ? 0.5
+            : 1,
       }}
     >
-      <h4>{task.title}</h4>
 
-      <button onClick={() => removeTask(task.id)}>Delete</button>
+      <h4>
+        {task.title}
+      </h4>
+
+      <p>
+        Priority:
+        {" "}
+        {task.priority}
+      </p>
+
+      <p>
+        Due:
+        {" "}
+        {task.dueDate}
+      </p>
+
+      <button
+        onClick={() =>
+          removeTask(
+            task.id
+          )
+        }
+      >
+        Delete
+      </button>
+
     </div>
   );
 };

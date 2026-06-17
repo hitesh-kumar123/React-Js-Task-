@@ -1,29 +1,57 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  projects: [],
+
+  selectedProject: null,
+};
+
 const projectSlice = createSlice({
-    name: "projects",
+  name: "projects",
 
-    initialState: {
-        list: [],
+  initialState,
+
+  reducers: {
+    addProject: (state, action) => {
+      state.projects.push(action.payload);
     },
 
-    reducers: {
-        addProject: (state, action) => {
-            state.list.push(action.payload);
-        },
+    updateProject: (state, action) => {
+      const index =
+        state.projects.findIndex(
+          (project) =>
+            project.id === action.payload.id
+        );
 
-        // Delete
-        deleteProject: (state, action) => {
-            state.list = state.list.filter(
-                project => project.id !== action.payload
-            );
-        }
-
-
-
+      if (index !== -1) {
+        state.projects[index] =
+          action.payload;
+      }
     },
-})
 
-export const { addProject, deleteProject } = projectSlice.actions;
+    deleteProject: (state, action) => {
+      state.projects =
+        state.projects.filter(
+          (project) =>
+            project.id !== action.payload
+        );
+    },
+
+    selectProject: (
+      state,
+      action
+    ) => {
+      state.selectedProject =
+        action.payload;
+    },
+  },
+});
+
+export const {
+  addProject,
+  updateProject,
+  deleteProject,
+  selectProject,
+} = projectSlice.actions;
 
 export default projectSlice.reducer;

@@ -1,60 +1,31 @@
-import { useDispatch } from "react-redux";
-
-import { v4 as uuid }
-    from "uuid";
-
 import {
-    addNotification,
-} from "../redux/notificationSlice";
+  toast,
+} from "react-toastify";
 
 export const useNotifications =
-    () => {
+() => {
 
-        const dispatch =
-            useDispatch();
+  return {
 
-        const success = (
-            message
-        ) => {
+    success: (
+      message
+    ) =>
+      toast.success(
+        message
+      ),
 
-            dispatch(
-                addNotification({
-                    id: uuid(),
-                    type: "success",
-                    message,
-                })
-            );
-        };
+    error: (
+      message
+    ) =>
+      toast.error(
+        message
+      ),
 
-        const error = (
-            message
-        ) => {
-
-            dispatch(
-                addNotification({
-                    id: uuid(),
-                    type: "error",
-                    message,
-                })
-            );
-        };
-
-        const info = (
-            message
-        ) => {
-
-            dispatch(
-                addNotification({
-                    id: uuid(),
-                    type: "info",
-                    message,
-                })
-            );
-        };
-
-        return {
-            success,
-            error,
-            info,
-        };
-    };
+    info: (
+      message
+    ) =>
+      toast.info(
+        message
+      ),
+  };
+};
