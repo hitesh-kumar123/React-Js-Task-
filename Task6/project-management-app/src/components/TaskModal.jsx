@@ -1,42 +1,57 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import useTasks from "../hooks/useTasks";
 
-const TaskModal = ({
-  isOpen,
-  closeModal,
-}) => {
-  const { createTask } = useTasks();
+const TaskModal = ({ isOpen, closeModal, selectedTask }) => {
+  const { createTask, editTask } = useTasks();
 
-  const [title, setTitle] =
-    useState("");
+  const [title, setTitle] = useState("");
 
-  const [priority, setPriority] =
-    useState("Medium");
+  const [priority, setPriority] = useState("Medium");
 
-  const [assignee, setAssignee] =
-    useState("");
+  const [assignee, setAssignee] = useState("");
 
-  const [dueDate, setDueDate] =
-    useState("");
+  const [dueDate, setDueDate] = useState("");
+
+  useEffect(() => {
+    if (selectedTask) {
+      setTitle(selectedTask.title);
+
+      setPriority(selectedTask.priority);
+
+      setAssignee(selectedTask.assignee);
+
+      setDueDate(selectedTask.dueDate);
+    } else {
+      setTitle("");
+      setPriority("Medium");
+      setAssignee("");
+      setDueDate("");
+    }
+  }, [selectedTask]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    createTask({
-      id: Date.now(),
-      title,
-      priority,
-      assignee,
-      dueDate,
-      boardId: "todo",
-    });
+    if (selectedTask) {
+      editTask(selectedTask.id, {
+        title,
+        priority,
+        assignee,
+        dueDate,
+      });
+    } else {
+      createTask({
+        id: Date.now().toString(),
+        title,
+        priority,
+        assignee,
+        dueDate,
+        boardId: "todo",
+      });
+    }
 
     closeModal();
-
-    setTitle("");
-    setPriority("Medium");
-    setAssignee("");
-    setDueDate("");
   };
 
   if (!isOpen) return null;
@@ -44,72 +59,43 @@ const TaskModal = ({
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <h2>Create Task</h2>
+        <h2>{selectedTask ? "Edit Task" : "Create Task"}</h2>
 
-        <form
-          onSubmit={handleSubmit}
-        >
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Task Title"
             value={title}
-            onChange={(e) =>
-              setTitle(e.target.value)
-            }
+            onChange={(e) => setTitle(e.target.value)}
             required
           />
 
           <select
             value={priority}
-            onChange={(e) =>
-              setPriority(
-                e.target.value
-              )
-            }
+            onChange={(e) => setPriority(e.target.value)}
           >
-            <option>
-              Low
-            </option>
-            <option>
-              Medium
-            </option>
-            <option>
-              High
-            </option>
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
           </select>
 
           <input
             type="text"
             placeholder="Assignee"
             value={assignee}
-            onChange={(e) =>
-              setAssignee(
-                e.target.value
-              )
-            }
+            onChange={(e) => setAssignee(e.target.value)}
           />
 
           <input
             type="date"
             value={dueDate}
-            onChange={(e) =>
-              setDueDate(
-                e.target.value
-              )
-            }
+            onChange={(e) => setDueDate(e.target.value)}
           />
 
           <div className="modal-actions">
-            <button
-              type="submit"
-            >
-              Save
-            </button>
+            <button type="submit">Save</button>
 
-            <button
-              type="button"
-              onClick={closeModal}
-            >
+            <button type="button" onClick={closeModal}>
               Cancel
             </button>
           </div>

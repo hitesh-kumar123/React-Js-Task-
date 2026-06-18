@@ -2,7 +2,7 @@ import useDragAndDrop from "../hooks/useDragAndDrop";
 import useTasks from "../hooks/useTasks";
 import useAuth from "../hooks/useAuth";
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, onEditTask }) => {
   const { handleDragStart } = useDragAndDrop();
 
   const { removeTask } = useTasks();
@@ -26,6 +26,8 @@ const TaskCard = ({ task }) => {
       <p>Assignee: {task.assignee}</p>
 
       <p>Due: {task.dueDate}</p>
+
+      <button onClick={() => onEditTask(task)}>Edit</button>
 
       {role === "Admin" && <button onClick={handleDelete}>Delete Task</button>}
     </div>

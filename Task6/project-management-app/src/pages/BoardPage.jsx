@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Board from "../components/Board";
 import TaskModal from "../components/TaskModal";
 
@@ -7,41 +9,40 @@ import useModal from "../hooks/useModal";
 
 const BoardPage = () => {
   const { boards } = useBoards();
-
   const { tasks } = useTasks();
 
-  const {
-    isOpen,
-    openModal,
-    closeModal,
-  } = useModal();
+  const { isOpen, openModal, closeModal } = useModal();
+
+  const [selectedTask, setSelectedTask] = useState(null);
+
+  const handleAddTask = () => {
+    setSelectedTask(null);
+    openModal();
+  };
+
+  const handleEditTask = (task) => {
+    setSelectedTask(task);
+    openModal();
+  };
 
   return (
     <div className="board-page">
       <div className="board-header">
         <h2>Board View</h2>
 
-        <button
-          onClick={openModal}
-        >
-          Add Task
-        </button>
+        <button onClick={handleAddTask}>Add Task</button>
       </div>
 
       <div className="boards-container">
         {boards.map((board) => {
-          const boardTasks =
-            tasks.filter(
-              (task) =>
-                task.boardId ===
-                board.id
-            );
+          const boardTasks = tasks.filter((task) => task.boardId === board.id);
 
           return (
             <Board
               key={board.id}
               board={board}
               tasks={boardTasks}
+              onEditTask={handleEditTask}
             />
           );
         })}
@@ -50,6 +51,7 @@ const BoardPage = () => {
       <TaskModal
         isOpen={isOpen}
         closeModal={closeModal}
+        selectedTask={selectedTask}
       />
     </div>
   );
