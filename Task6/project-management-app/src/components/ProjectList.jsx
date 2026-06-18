@@ -1,36 +1,22 @@
 import useProjects from "../hooks/useProjects";
+import useAuth from "../hooks/useAuth";
 
 const ProjectList = () => {
-  const {
-    projects,
-    chooseProject,
-    removeProject,
-  } = useProjects();
+  const { projects, chooseProject, removeProject } = useProjects();
+
+  const { role } = useAuth();
 
   return (
     <div className="project-list">
       <h3>Projects</h3>
 
       {projects.map((project) => (
-        <div
-          key={project.id}
-          className="project-item"
-        >
-          <span
-            onClick={() =>
-              chooseProject(project)
-            }
-          >
-            {project.name}
-          </span>
+        <div key={project.id} className="project-item">
+          <span onClick={() => chooseProject(project)}>{project.name}</span>
 
-          <button
-            onClick={() =>
-              removeProject(project.id)
-            }
-          >
-            Delete
-          </button>
+          {role === "Admin" && (
+            <button onClick={() => removeProject(project.id)}>Delete</button>
+          )}
         </div>
       ))}
     </div>

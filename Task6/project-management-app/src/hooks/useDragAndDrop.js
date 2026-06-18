@@ -10,7 +10,7 @@ const useDragAndDrop = () => {
   ) => {
     event.dataTransfer.setData(
       "taskId",
-      taskId
+      String(taskId)
     );
   };
 
@@ -18,6 +18,8 @@ const useDragAndDrop = () => {
     event,
     boardId
   ) => {
+    event.preventDefault();
+
     const taskId =
       event.dataTransfer.getData("taskId");
 
@@ -29,7 +31,9 @@ const useDragAndDrop = () => {
     );
   };
 
-  const handleDragOver = (event) => {
+  const handleDragOver = (
+    event
+  ) => {
     event.preventDefault();
   };
 

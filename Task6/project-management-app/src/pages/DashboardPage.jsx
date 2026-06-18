@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Navbar from "../components/Navbar";
 import ProjectList from "../components/ProjectList";
 import useProjects from "../hooks/useProjects";
 
 const DashboardPage = () => {
-  const [projectName, setProjectName] =
-    useState("");
+  const navigate = useNavigate();
+
+  const [projectName, setProjectName] = useState("");
 
   const {
     createProject,
@@ -13,10 +16,10 @@ const DashboardPage = () => {
   } = useProjects();
 
   const handleAddProject = () => {
-    if (!projectName) return;
+    if (!projectName.trim()) return;
 
     createProject({
-      id: Date.now(),
+      id: Date.now().toString(),
       name: projectName,
     });
 
@@ -36,15 +39,11 @@ const DashboardPage = () => {
             placeholder="Project Name"
             value={projectName}
             onChange={(e) =>
-              setProjectName(
-                e.target.value
-              )
+              setProjectName(e.target.value)
             }
           />
 
-          <button
-            onClick={handleAddProject}
-          >
+          <button onClick={handleAddProject}>
             Add Project
           </button>
 
@@ -52,22 +51,22 @@ const DashboardPage = () => {
         </div>
 
         <div className="right-panel">
-          <h2>
-            Selected Project
-          </h2>
+          <h2>Selected Project</h2>
 
           {selectedProject ? (
-            <div>
-              <h3>
-                {
-                  selectedProject.name
+            <>
+              <h3>{selectedProject.name}</h3>
+
+              <button
+                onClick={() =>
+                  navigate("/board")
                 }
-              </h3>
-            </div>
+              >
+                Open Board
+              </button>
+            </>
           ) : (
-            <p>
-              Select a project
-            </p>
+            <p>Select a project first</p>
           )}
         </div>
       </div>

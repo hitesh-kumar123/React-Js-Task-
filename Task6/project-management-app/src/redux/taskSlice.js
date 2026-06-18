@@ -29,10 +29,13 @@ const taskSlice = createSlice({
     },
 
     moveTask: (state, action) => {
-      const { taskId, boardId } = action.payload;
+      const { taskId, boardId } =
+        action.payload;
 
       const task = state.tasks.find(
-        (task) => task.id === taskId
+        (task) =>
+          String(task.id) ===
+          String(taskId)
       );
 
       if (task) {
