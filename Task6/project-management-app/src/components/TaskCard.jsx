@@ -25,16 +25,20 @@ const TaskCard = ({ task, onEditTask }) => {
       onDragStart={(event) => handleDragStart(event, task.id)}
     >
       <h4>{task.title}</h4>
-
       <p>Priority: {task.priority}</p>
-
       <p>Assignee: {task.assignee}</p>
-
       <p>Due: {task.dueDate}</p>
 
-      <button onClick={() => onEditTask(task)}>Edit</button>
-
-      {role === "Admin" && <button onClick={handleDelete}>Delete Task</button>}
+      <div className="task-card-actions">
+        <button className="btn-edit" onClick={() => onEditTask(task)}>
+          Edit
+        </button>
+        {role === "Admin" && (
+          <button className="btn-delete" onClick={handleDelete}>
+            Delete
+          </button>
+        )}
+      </div>
     </div>
   );
 };

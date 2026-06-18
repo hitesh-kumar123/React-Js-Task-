@@ -17,12 +17,14 @@ const Navbar = () => {
       <h2>Project Manager</h2>
 
       <div className="navbar-right">
-        <span>{user?.email}</span>
-
-        <span>{role}</span>
-
-        <button onClick={handleLogout}>Logout</button>
-        <button onClick={() => navigate("/settings")}>Settings</button>
+        <span className="user-email">{user?.email}</span>
+        <span className="user-role">{role}</span>
+        <button className="btn-settings" onClick={() => navigate("/settings")}>
+          Settings
+        </button>
+        <button className="btn-logout" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
     </div>
   );

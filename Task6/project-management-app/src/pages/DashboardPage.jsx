@@ -10,10 +10,7 @@ const DashboardPage = () => {
 
   const [projectName, setProjectName] = useState("");
 
-  const {
-    createProject,
-    selectedProject,
-  } = useProjects();
+  const { createProject, selectedProject } = useProjects();
 
   const handleAddProject = () => {
     if (!projectName.trim()) return;
@@ -38,35 +35,28 @@ const DashboardPage = () => {
             type="text"
             placeholder="Project Name"
             value={projectName}
-            onChange={(e) =>
-              setProjectName(e.target.value)
-            }
+            onChange={(e) => setProjectName(e.target.value)}
           />
 
-          <button onClick={handleAddProject}>
-            Add Project
-          </button>
+          <button onClick={handleAddProject}>Add Project</button>
 
           <ProjectList />
         </div>
-
         <div className="right-panel">
-          <h2>Selected Project</h2>
+          <h2 className="panel-title">Selected Project</h2>
 
           {selectedProject ? (
-            <>
-              <h3>{selectedProject.name}</h3>
-
+            <div className="project-preview">
+              <h3 className="project-preview-name">{selectedProject.name}</h3>
               <button
-                onClick={() =>
-                  navigate("/board")
-                }
+                className="btn-open-board"
+                onClick={() => navigate("/board")}
               >
-                Open Board
+                Open Board →
               </button>
-            </>
+            </div>
           ) : (
-            <p>Select a project first</p>
+            <p className="panel-empty">Select a project to get started</p>
           )}
         </div>
       </div>

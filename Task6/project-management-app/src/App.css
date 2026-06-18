@@ -158,7 +158,6 @@ input::placeholder {
 /* =========================
    NAVBAR
 ========================= */
-
 .navbar {
   height: 64px;
   background: var(--bg-surface);
@@ -172,25 +171,59 @@ input::placeholder {
   box-shadow: var(--shadow-sm);
 }
 
+.navbar h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
 .navbar-right {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.navbar-right button {
+.navbar-right .user-email {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.navbar-right .user-role {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--blue);
+  background: rgba(74, 108, 247, 0.1);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.btn-logout {
   background: transparent;
   color: var(--red);
-  padding: 8px 14px;
+  padding: 7px 14px;
   border-radius: var(--radius-sm);
   border: 1px solid rgba(220, 53, 69, 0.35);
+  font-size: 13px;
   font-weight: 500;
 }
 
-.navbar-right button:hover {
+.btn-logout:hover {
   background: rgba(220, 53, 69, 0.06);
 }
 
+.btn-settings {
+  background: transparent;
+  color: var(--blue);
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(74, 108, 247, 0.35);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.btn-settings:hover {
+  background: rgba(74, 108, 247, 0.06);
+}
 /* =========================
    DASHBOARD
 ========================= */
@@ -219,7 +252,7 @@ input::placeholder {
   width: 100%;
 }
 
-.left-panel button {
+.left-panel > button {
   background: var(--green);
   color: #fff;
   padding: 10px;
@@ -227,7 +260,7 @@ input::placeholder {
   font-weight: 500;
 }
 
-.left-panel button:hover {
+.left-panel > button:hover {
   background: var(--green-hover);
 }
 
@@ -237,7 +270,53 @@ input::placeholder {
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
-  padding: 20px;
+  padding: 24px;
+}
+
+.panel-title {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.project-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+}
+
+.project-preview-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.btn-open-board {
+  background: var(--blue);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.btn-open-board:hover {
+  background: var(--blue-hover);
+}
+
+.panel-empty {
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 32px 0;
+  text-align: center;
 }
 
 .project-list {
@@ -338,43 +417,52 @@ input::placeholder {
 /* =========================
    TASK CARD
 ========================= */
-
 .task-card {
-  background: var(--bg-input); /* slightly offset from board bg */
-  border: 1px solid var(--border);
+  background: var(--bg-input);
+  border: 1px solid var(--border); /* ← this line */
   border-radius: var(--radius-sm);
-
   padding: 14px;
   margin-bottom: 10px;
-
   cursor: grab;
   transition:
     box-shadow 0.15s,
     border-color 0.15s;
 }
-
-.task-card:hover {
-  border-color: var(--border-focus);
-  box-shadow: var(--shadow-sm); /* was hardcoded hex */
+.task-card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  gap: 8px;
 }
 
-.task-card:active {
-  cursor: grabbing;
-}
-
-.task-card h4 {
-  font-size: 14px;
+.task-card-actions button {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 12px;
   font-weight: 500;
-  margin-bottom: 8px;
-  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
 }
 
-.task-card p {
-  margin-bottom: 4px;
-  font-size: 13px;
-  color: var(--text-secondary);
+.btn-edit {
+  background: transparent;
+  color: var(--blue);
+  border: 1px solid rgba(74, 108, 247, 0.35);
 }
 
+.btn-edit:hover {
+  background: rgba(74, 108, 247, 0.08);
+}
+
+.btn-delete {
+  background: transparent;
+  color: var(--red);
+  border: 1px solid rgba(220, 53, 69, 0.35);
+}
+
+.btn-delete:hover {
+  background: rgba(220, 53, 69, 0.06);
+}
 /* =========================
    MODAL
 ========================= */
