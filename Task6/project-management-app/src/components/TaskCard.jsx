@@ -1,6 +1,7 @@
 import useDragAndDrop from "../hooks/useDragAndDrop";
 import useTasks from "../hooks/useTasks";
 import useAuth from "../hooks/useAuth";
+import useNotifications from "../hooks/useNotifications";
 
 const TaskCard = ({ task, onEditTask }) => {
   const { handleDragStart } = useDragAndDrop();
@@ -9,8 +10,12 @@ const TaskCard = ({ task, onEditTask }) => {
 
   const { role } = useAuth();
 
+  const { showInfo } = useNotifications();
+
   const handleDelete = () => {
     removeTask(task.id);
+
+    showInfo("Task Deleted Successfully");
   };
 
   return (

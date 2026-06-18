@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import useTasks from "../hooks/useTasks";
+import useNotifications from "../hooks/useNotifications";
 
 const TaskModal = ({ isOpen, closeModal, selectedTask }) => {
   const { createTask, editTask } = useTasks();
@@ -12,9 +13,11 @@ const TaskModal = ({ isOpen, closeModal, selectedTask }) => {
   const [assignee, setAssignee] = useState("");
 
   const [dueDate, setDueDate] = useState("");
+  const { showSuccess } = useNotifications();
 
   useEffect(() => {
     if (selectedTask) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTitle(selectedTask.title);
 
       setPriority(selectedTask.priority);
@@ -40,6 +43,7 @@ const TaskModal = ({ isOpen, closeModal, selectedTask }) => {
         assignee,
         dueDate,
       });
+      showSuccess("Task Updated Successfully");
     } else {
       createTask({
         id: Date.now().toString(),
@@ -49,6 +53,7 @@ const TaskModal = ({ isOpen, closeModal, selectedTask }) => {
         dueDate,
         boardId: "todo",
       });
+      showSuccess("Task Created Successfully");
     }
 
     closeModal();
