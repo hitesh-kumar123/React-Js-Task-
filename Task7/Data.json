@@ -1,0 +1,134 @@
+{
+  "id": "usr_8f3a92",
+  "username": "johndoe",
+  "email": "john@example.com",
+  "isActive": true,
+  "role": "admin",
+  "createdAt": "2026-03-10T12:30:00Z",
+  "profile": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "age": 32,
+    "gender": "male",
+    "phoneNumbers": [
+      {
+        "type": "mobile",
+        "number": "+1-202-555-0182",
+        "verified": true
+      },
+      {
+        "type": "work",
+        "number": "+1-202-555-0175",
+        "verified": false
+      }
+    ],
+    "address": {
+      "street": "123 Market Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "country": "USA",
+      "postalCode": "94105",
+      "geo": {
+        "lat": 37.7749,
+        "lng": -122.4194
+      }
+    },
+    "socialLinks": {
+      "twitter": "https://twitter.com/johndoe",
+      "linkedin": "https://linkedin.com/in/johndoe",
+      "github": "https://github.com/johndoe"
+    }
+  },
+  "preferences": {
+    "language": "en",
+    "timezone": "Asia/Kolkata",
+    "notifications": {
+      "email": true,
+      "sms": false,
+      "push": true,
+      "marketingEmails": false
+    },
+    "theme": "dark"
+  },
+  "subscription": {
+    "plan": "pro",
+    "status": "active",
+    "billingCycle": "monthly",
+    "price": 29.99,
+    "currency": "USD",
+    "startedAt": "2025-10-01T00:00:00Z",
+    "renewalDate": "2026-04-01T00:00:00Z",
+    "features": ["analytics", "priority-support", "team-access"]
+  },
+  "teams": [
+    {
+      "teamId": "team_1001",
+      "name": "Engineering",
+      "role": "owner",
+      "members": [
+        {
+          "userId": "usr_1",
+          "name": "Alice",
+          "email": "alice@example.com"
+        },
+        {
+          "userId": "usr_2",
+          "name": "Bob",
+          "email": "bob@example.com"
+        }
+      ]
+    },
+    {
+      "teamId": "team_1002",
+      "name": "Marketing",
+      "role": "member",
+      "members": []
+    }
+  ],
+  "projects": [
+    {
+      "projectId": "proj_1",
+      "name": "AI Dashboard",
+      "status": "in-progress",
+      "tags": ["ai", "dashboard", "analytics"],
+      "tasks": [
+        {
+          "taskId": "task_101",
+          "title": "Setup API",
+          "completed": true,
+          "dueDate": "2026-03-15"
+        },
+        {
+          "taskId": "task_102",
+          "title": "Create UI Layout",
+          "completed": false,
+          "dueDate": "2026-03-20"
+        }
+      ]
+    }
+  ],
+  "activityLog": [
+    {
+      "action": "login",
+      "ip": "192.168.1.1",
+      "device": "MacBook Pro",
+      "timestamp": "2026-03-10T10:00:00Z"
+    },
+    {
+      "action": "updated_profile",
+      "ip": "192.168.1.1",
+      "device": "MacBook Pro",
+      "timestamp": "2026-03-10T10:05:00Z"
+    }
+  ],
+  "security": {
+    "twoFactorEnabled": true,
+    "backupCodes": ["ABCD-1234", "EFGH-5678"],
+    "lastPasswordChange": "2026-02-01T09:00:00Z"
+  },
+  "metadata": {
+    "source": "web",
+    "imported": false,
+    "tags": ["beta-user", "early-adopter"]
+  }
+}
