@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
-import Header from "@/components/layout/Header";
-
 import "./globals.css";
 
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+
 export const metadata: Metadata = {
-  title: "Next Blog",
-  description: "A simple blog built with Next.js",
+  title: {
+    default: "Next Blog",
+    template: "%s | Next Blog",
+  },
+  description: "Modern blog built with Next.js 16",
+  keywords: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Frontend"],
 };
 
 export default function RootLayout({
@@ -15,9 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-white text-slate-900 antialiased">
         <Header />
+
         {children}
+
+        <Footer />
       </body>
     </html>
   );
